@@ -7,25 +7,20 @@ from bs4 import BeautifulSoup as bsoup
 print sys.argv
 
 if len(sys.argv) < 3:
-    print "Usage example: python copy.py https://www.github.com/Netflix /path/to/target-repo-directory"
+    print "Usage example: python copy.py Netflix /path/to/target-repo-directory"
     sys.exit(1)
 
 orgurl = sys.argv[1]
 targetdir = sys.argv[2]
-# parallel = sys.argv[3]
 
+orgurl = "https://www.github.com/%s?page=1" % orgurl
 
+print "clonning all repos from", orgurl
 # move to targetdir
-print "targetdir", targetdir
+print "target dir", targetdir
 os.chdir(targetdir)
 
-# normalize url
-if "?" not in orgurl:
-    orgurl = orgurl + "?page="
-else:
-    orgurl = orgurl.split("?")[0] + "?page="
 
-print "orgurl", orgurl
 # read page
 def read_page(url):
     print "reading", url
